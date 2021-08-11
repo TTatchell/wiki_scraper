@@ -8,7 +8,7 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    1
+    0.5
   end
     
 
@@ -23,6 +23,7 @@ class WikiScraper::CLI
     puts "Let's check out an article:"
     line
     sleep(time)
-    WikiScraper::Scraper.test()
+    blank
+    WikiScraper::Scraper.new.get_page()
   end
 end

@@ -6,12 +6,16 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    nokogiri (1.12.3-x86_64-linux)
+      racc (~> 1.4)
+    racc (1.5.2)
     rake (13.0.6)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  nokogiri (= 1.12.3)
   rake (~> 13.0)
   wiki_scraper!
 

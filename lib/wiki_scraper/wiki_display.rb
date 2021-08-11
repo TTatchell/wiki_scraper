@@ -7,7 +7,8 @@ class WikiScraper::WikiDisplay
     puts "\e[2J\e[f"
   end
 
-  def first(page)
+  def first(page) #Displays title, short desc and subheadings
+    blank
     get_title(page)
     get_first_p(page)
     get_subheadings(page)

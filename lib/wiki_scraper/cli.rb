@@ -13,8 +13,24 @@ class WikiScraper::CLI
 
   def loading
     3.times do |index|
-      puts "Loading#{"." * index}"
       blank
+      puts "Loading#{"." * (index + 1)}"
+      sleep(0.5)
+    end
+  end
+
+  def read_more
+    puts "Would you like to read more? (Y/N)"
+    input = gets.downcase
+    if input == "y"
+      puts "yes"
+    elsif input == "n"
+      puts "no"
+    else
+      puts "Invalid input. Try Again"
+      sleep(2)
+      blank
+      article
     end
   end
 
@@ -29,9 +45,10 @@ class WikiScraper::CLI
     puts "Let's check out an article:"
     line
     sleep(time)
-    blank
     loading
     page = WikiScraper::Scraper.new.get_page
-    WikiScraper::WikiDisplay.new.first(page)
+    article = WikiScraper::WikiDisplay.new.first(page)
+    puts
+    read_more
   end
 end

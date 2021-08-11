@@ -7,36 +7,38 @@ class WikiScraper::WikiDisplay
     puts "\e[2J\e[f"
   end
 
-  def first(page) #Displays title, short desc and subheadings
+  def initialize(page) #Displays title, short desc and subheadings
     blank
-    get_title(page)
-    get_first_p(page)
-    get_subheadings(page)
+    @page = page
+    print_title()
+    print_summary()
+    print_subheadings()
   end
 
-  def get_title(page)
-    title = page.css("#firstHeading").text
-    puts "#{title}"
+  def print_title()
+    @title = @page.css("#firstHeading").text
+    puts "#{@title}"
     line
   end
 
-  def get_first_p(page)
-    paragraphs = page.css("p")
-    puts paragraphs.find { |para| para.text.length > 50 }.text
+  def print_summary()
+    paragraphs = @page.css("p")
+    @summary = paragraphs.find { |para| para.text.length > 50 }.text
+    puts @summary
     line
   end
 
-  def get_subheadings(page)
+  def print_subheadings()
     bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes"]
-    headings = page.css("h2")
+    headings = @page.css("h2")
     index = 1
-    sorted_headings = []
+    @sorted_headings = []
     puts "Topics:"
     headings.each do |heading|
       if bad_headings.any? { |bad| bad == heading.text }
         next
       end
-      sorted_headings << heading.text
+      @sorted_headings << heading.text
       puts "#{index}. #{heading.text}"
       index += 1
     end

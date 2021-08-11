@@ -8,29 +8,29 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    1
+    0.1
   end
 
   def loading
     3.times do |index|
       blank
       puts "Loading#{"." * (index + 1)}"
-      sleep(0.5)
+      sleep(time)
     end
   end
 
   def read_more
     puts "Would you like to read more? (Y/N)"
-    input = gets.downcase
-    if input == "y"
+    input = gets
+    if input[0] == "y"
       puts "yes"
-    elsif input == "n"
+    elsif input[0] == "n"
       puts "no"
     else
       puts "Invalid input. Try Again"
-      sleep(2)
+      sleep(4)
       blank
-      article
+      #article.print_subheadings()
     end
   end
 
@@ -47,7 +47,8 @@ class WikiScraper::CLI
     sleep(time)
     loading
     page = WikiScraper::Scraper.new.get_page
-    article = WikiScraper::WikiDisplay.new.first(page)
+    #article = WikiScraper::WikiDisplay.new.first(page)
+    article = WikiScraper::WikiDisplay.new(page)
     puts
     read_more
   end

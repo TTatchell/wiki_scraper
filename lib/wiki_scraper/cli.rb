@@ -4,13 +4,19 @@ class WikiScraper::CLI
   end
 
   def line
-    puts "##############################################"
+    puts "----------------------------------------------"
   end
 
   def time #This is for testing to speed things up
-    0.1
+    1
   end
-    
+
+  def loading
+    3.times do |index|
+      puts "Loading#{"." * index}"
+      blank
+    end
+  end
 
   def cli
     blank
@@ -24,6 +30,7 @@ class WikiScraper::CLI
     line
     sleep(time)
     blank
+    loading
     WikiScraper::Scraper.new.get_page()
   end
 end

@@ -1,6 +1,6 @@
 class WikiScraper::Scraper
   def get_page
-    url = "https://en.wikipedia.org/wiki/dog"
+    url = "https://en.wikipedia.org/wiki/Human"
     unparsed_page = HTTParty.get(url)
     parsed_page = Nokogiri::HTML(unparsed_page.body)
     #get_title(parsed_page)
@@ -19,13 +19,15 @@ class WikiScraper::Scraper
   end
 
   def get_subheadings(page)
-    bad_headings = ['Contents', 'See also', 'References', 'Bibliography', 'External links', 'Navigation menu']
+    bad_headings = ['Contents', 'See also', 'References', 'Bibliography', 'External links', 'Navigation menu', 'Notes']
     headings = page.css("h2")
+    index = 1
     headings.each do |heading|
       if bad_headings.any? {|bad| bad == heading.text}
         next
       end
-      puts heading.text
+      puts "#{index}. #{heading.text}"
+      index += 1
     end
   end
 end

@@ -1,13 +1,15 @@
 class WikiScraper::Scraper
   def get_page
-    puts "made it"
-    html = "https://en.wikipedia.org/wiki/Dog"
-    html = "https://www.rubyguides.com/2012/01/parsing-html-in-ruby/"
-
-    
-    parsed_data = Nokogiri::HTML.parse(html)
-
-    puts parsed_data.title
-    
+    url = "https://en.wikipedia.org/wiki/Dog"
+    unparsed_page = HTTParty.get(url)
+    parsed_page = Nokogiri::HTML(unparsed_page)
+    get_title(parsed_page)
   end
+
+  def get_title(page)
+    title = page.css('#firstHeading').text
+    puts title
+  end
+
+
 end

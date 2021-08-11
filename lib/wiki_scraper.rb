@@ -1,4 +1,3 @@
+#This will probably be deleted
 module WikiScraper
 end
-
-#This will probably be deleted

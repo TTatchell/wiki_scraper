@@ -1,8 +1,4 @@
-class WikiScraper
-  def initialize
-    cli
-  end
-
+class WikiScraper::CLI
   def blank
     puts "\e[2J\e[f"
   end
@@ -11,18 +7,22 @@ class WikiScraper
     puts "##############################################"
   end
 
+  def time #This is for testing to speed things up
+    1
+  end
+    
+
   def cli
     blank
     line
     puts "           Welcome To WikiScraper!            "
     line
-    sleep(3)
+    sleep(time)
     blank
     line
     puts "Let's check out an article:"
     line
-    sleep(3)
+    sleep(time)
+    WikiScraper::Scraper.test()
   end
 end
-
-WikiScraper.new

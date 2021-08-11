@@ -1,3 +1,4 @@
-#This will be called upon and require the files in "../lib/wiki_scraper/*"
-
-require_relative "wiki_scraper/version"
+require_relative "../lib/wiki_scraper.rb"
+require_relative "../lib/wiki_scraper/cli.rb"
+require_relative "../lib/wiki_scraper/scraper.rb"
+require_relative "../lib/wiki_scraper/version.rb"

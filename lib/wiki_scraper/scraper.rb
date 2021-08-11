@@ -2,7 +2,7 @@ class WikiScraper::Scraper
   def get_page
     url = "https://en.wikipedia.org/wiki/Dog"
     unparsed_page = HTTParty.get(url)
-    parsed_page = Nokogiri::HTML(unparsed_page)
+    parsed_page = Nokogiri::HTML(unparsed_page.body)
     get_title(parsed_page)
   end
 

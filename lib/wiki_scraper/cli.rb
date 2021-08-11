@@ -31,6 +31,7 @@ class WikiScraper::CLI
     sleep(time)
     blank
     loading
-    WikiScraper::Scraper.new.get_page()
+    page = WikiScraper::Scraper.new.get_page
+    WikiScraper::WikiDisplay.new.first(page)
   end
 end

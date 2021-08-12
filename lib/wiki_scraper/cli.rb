@@ -8,7 +8,7 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    0.1
+    3
   end
 
   def loading
@@ -28,9 +28,10 @@ class WikiScraper::CLI
       puts "no"
     else
       puts "Invalid input. Try Again"
-      sleep(4)
+      sleep(2)
       blank
-      #article.print_subheadings()
+      @article.print_subheadings
+      read_more
     end
   end
 
@@ -47,8 +48,7 @@ class WikiScraper::CLI
     sleep(time)
     loading
     page = WikiScraper::Scraper.new.get_page
-    #article = WikiScraper::WikiDisplay.new.first(page)
-    article = WikiScraper::WikiDisplay.new(page)
+    @article = WikiScraper::WikiDisplay.new(page)
     puts
     read_more
   end

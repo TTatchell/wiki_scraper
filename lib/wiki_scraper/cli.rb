@@ -8,7 +8,7 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    3
+    0.1
   end
 
   def loading
@@ -24,8 +24,10 @@ class WikiScraper::CLI
     input = gets
     if input[0] == "y"
       puts "yes"
+      true
     elsif input[0] == "n"
       puts "no"
+      false
     else
       puts "Invalid input. Try Again"
       sleep(2)

@@ -13,22 +13,23 @@ class WikiScraper::WikiDisplay
     print_title()
     print_summary()
     print_subheadings()
+    #print_paragraph
   end
 
-  def print_title()
+  def print_title
     @title = @page.css("#firstHeading").text
     puts "#{@title}"
     line
   end
 
-  def print_summary()
+  def print_summary
     paragraphs = @page.css("p")
     @summary = paragraphs.find { |para| para.text.length > 50 }.text
     puts @summary
     line
   end
 
-  def print_subheadings()
+  def print_subheadings
     bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes"]
     headings = @page.css(".mw-headline")
     index = 1
@@ -43,4 +44,30 @@ class WikiScraper::WikiDisplay
       index += 1
     end
   end
+
+  def print_paragraph
+    h = Hash.new
+    heading_array = []
+
+    div = @page.css(".mw-parser-output").children.map do |thing|
+      if thing.name == "h2"
+        heading_array << thing.text.strip
+      else
+        if !heading_array.empty?
+          h[heading_array.last] ||= []
+          h[heading_array.last] << thing.text
+        end
+      end
+    end
+
+    binding.pry
+  end
 end
+
+# thing = condition && condition
+# thing = after heading1 && before heading2
+
+# get the index of heading 1 and 2, then find all items between that match <p>
+
+# hash = {title: title
+#         content: [p,p,link]}

@@ -10,10 +10,10 @@ class WikiScraper::WikiDisplay
   def initialize(page) #Displays title, short desc and subheadings
     blank
     @page = page
-    print_title()
-    print_summary()
-    print_subheadings()
-    #print_paragraph
+    #print_title()
+    #print_summary()
+    #print_subheadings()
+    print_paragraph
   end
 
   def print_title
@@ -49,7 +49,7 @@ class WikiScraper::WikiDisplay
     h = Hash.new
     heading_array = []
 
-    div = @page.css(".mw-parser-output").children.map do |thing|
+    @page.css(".mw-parser-output").children.map do |thing|
       if thing.name == "h2"
         heading_array << thing.text.strip
       else

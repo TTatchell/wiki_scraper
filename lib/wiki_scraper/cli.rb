@@ -8,7 +8,7 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    2
+    0.2
   end
 
   def loading

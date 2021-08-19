@@ -23,18 +23,22 @@ class WikiScraper::CLI
     puts "Would you like to read more? (Y/N)"
     input = gets
     if input[0] == "y"
-      puts "yes"
       true
     elsif input[0] == "n"
-      puts "no"
       false
     else
       puts "Invalid input. Try Again"
-      sleep(2)
-      blank
-      @article.print_subheadings
       read_more
     end
+  end
+
+  def get_subheading_choice
+    puts "Alright, pick a topic: (0-#{@article.subheading_count})"
+    input = gets
+  end
+
+  def exit_message
+    puts "Have a great day!"
   end
 
   def cli
@@ -52,6 +56,10 @@ class WikiScraper::CLI
     page = WikiScraper::Scraper.new.get_page
     @article = WikiScraper::WikiDisplay.new(page)
     puts
-    read_more
+    if read_more
+      get_subheading_choice
+    else
+      exit_message
+    end
   end
 end

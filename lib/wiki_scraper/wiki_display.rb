@@ -67,4 +67,8 @@ class WikiScraper::WikiDisplay
       puts "#{index}. #{heading}"
     end
   end
+
+  def subheading_count
+    @heading_array.count-1
+  end
 end

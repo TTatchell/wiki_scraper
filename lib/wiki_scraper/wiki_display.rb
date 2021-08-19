@@ -31,7 +31,7 @@ class WikiScraper::WikiDisplay
       else
         if !@heading_array.empty? && thing.name == "p"
           @h[@heading_array.last] ||= []
-          @h[@heading_array.last] << thing.text
+          @h[@heading_array.last] << thing.text.gsub(/\[\d\d?\d?\]/, "")
           @h[@heading_array.last] << "\n"
         end
       end
@@ -48,6 +48,10 @@ class WikiScraper::WikiDisplay
       end
     end
   end
+
+  def clean_text(text)
+  end
+
 
   def print_trio #Prints title, summary, subheadings
     print_title
@@ -87,3 +91,5 @@ class WikiScraper::WikiDisplay
     @heading_array.count - 1
   end
 end
+
+#/\[\d\d?\d?\]/

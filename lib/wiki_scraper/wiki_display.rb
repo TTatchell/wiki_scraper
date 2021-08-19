@@ -7,45 +7,23 @@ class WikiScraper::WikiDisplay
     puts "\e[2J\e[f"
   end
 
-  def initialize(page) #Displays title, short desc and subheadings
+  def initialize(page)
     blank
     @page = page
-    #print_title()
-    #print_summary()
-    #print_subheadings()
-    print_paragraph
-  end
-
-  def print_title
     @title = @page.css("#firstHeading").text
-    puts "#{@title}"
-    line
+    get_summary
+    create_headings_and_paragraphs
+    print_title
+    print_summary
+    print_subheadings
   end
 
-  def print_summary
+  def get_summary
     paragraphs = @page.css("p")
     @summary = paragraphs.find { |para| para.text.length > 50 }.text
-    puts @summary
-    line
   end
 
-  def print_subheadings
-    bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes"]
-    headings = @page.css(".mw-headline")
-    index = 1
-    @sorted_headings = []
-    puts "Topics:"
-    headings.each do |heading|
-      if bad_headings.any? { |bad| bad == heading.text }
-        next
-      end
-      @sorted_headings << heading.text
-      puts "#{index}. #{heading.text}"
-      index += 1
-    end
-  end
-
-  def print_paragraph
+  def create_headings_and_paragraphs
     h = Hash.new
     heading_array = []
 
@@ -59,15 +37,23 @@ class WikiScraper::WikiDisplay
         end
       end
     end
+  end
 
-    binding.pry
+  def clean_headings_and_paragraphs
+    bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes"]
+  end
+
+  def print_title
+    puts "#{@title}"
+    line
+  end
+
+  def print_summary
+    puts @summary
+    line
+  end
+
+  def print_subheadings
+    puts "Topics:"
   end
 end
-
-# thing = condition && condition
-# thing = after heading1 && before heading2
-
-# get the index of heading 1 and 2, then find all items between that match <p>
-
-# hash = {title: title
-#         content: [p,p,link]}

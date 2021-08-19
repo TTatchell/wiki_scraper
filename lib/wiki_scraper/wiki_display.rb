@@ -18,7 +18,7 @@ class WikiScraper::WikiDisplay
 
   def get_summary
     paragraphs = @page.css("p")
-    @summary = paragraphs.find { |para| para.text.length > 50 }.text
+    @summary = paragraphs.find { |para| para.text.length > 50 }.text.gsub(/\[\d\d?\d?\]/, "")
   end
 
   def create_headings_and_paragraphs

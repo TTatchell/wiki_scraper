@@ -34,7 +34,7 @@ class WikiScraper::CLI
 
   def get_subheading_choice
     puts "Alright, pick a topic: (0-#{@article.subheading_count})"
-    gets.strip
+    gets.strip.to_i
   end
 
   def exit_message
@@ -58,7 +58,7 @@ class WikiScraper::CLI
     puts
     if read_more
       input = get_subheading_choice
-      binding.pry
+      @article.print_topic(input)
     else
       exit_message
     end

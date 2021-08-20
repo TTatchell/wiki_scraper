@@ -33,12 +33,37 @@ class WikiScraper::CLI
   end
 
   def get_subheading_choice
-    puts "Alright, pick a topic: (0-#{@article.subheading_count})"
-    gets.strip.to_i
+    puts "Alright, make a selection: (0-#{@article.subheading_count + 1})"
+    input = gets.strip.to_i
+  end
+
+  def return_to_menu
+    puts "Press enter to return"
+    gets
   end
 
   def exit_message
-    puts "Have a great day!"
+    blank
+    line
+    line
+    puts "             Have a great day!"
+    line
+    line
+    sleep(3)
+  end
+
+  def program_loop
+    while @running
+      blank
+      @article.print_trio
+      input = get_subheading_choice
+      if input == @article.subheading_count + 1
+        exit_message
+        break
+      end
+      @article.print_topic(input)
+      return_to_menu
+    end
   end
 
   def cli
@@ -56,12 +81,7 @@ class WikiScraper::CLI
     page = WikiScraper::Scraper.new.get_page
     @article = WikiScraper::WikiDisplay.new(page)
     puts
-    if read_more
-      input = get_subheading_choice
-      @article.print_topic(input)
-    else
-      exit_message
-    end
+    @running = true
+    program_loop
   end
-  puts "End of program"
 end

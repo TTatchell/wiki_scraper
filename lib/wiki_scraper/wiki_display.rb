@@ -13,7 +13,6 @@ class WikiScraper::WikiDisplay
     @title = @page.css("#firstHeading").text
     get_summary
     create_headings_and_paragraphs
-    print_trio
   end
 
   def get_summary
@@ -49,10 +48,6 @@ class WikiScraper::WikiDisplay
     end
   end
 
-  def clean_text(text)
-  end
-
-
   def print_trio #Prints title, summary, subheadings
     print_title
     print_summary
@@ -70,11 +65,16 @@ class WikiScraper::WikiDisplay
   end
 
   def print_subheadings
+    index = 0
     puts "Topics:"
     line
-    @heading_array.each_with_index do |heading, index|
+    @heading_array.each do |heading|
       puts "#{index}. #{heading}"
+      index += 1
     end
+    puts "\n"
+    puts "#{index}. To exit"
+    line
   end
 
   def print_topic(number)
@@ -85,11 +85,10 @@ class WikiScraper::WikiDisplay
     line
     line
     puts @h["#{@heading_array[number]}"]
+    line
   end
 
   def subheading_count
     @heading_array.count - 1
   end
 end
-
-#/\[\d\d?\d?\]/

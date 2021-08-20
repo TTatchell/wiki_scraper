@@ -11,6 +11,19 @@ class WikiScraper::CLI
     0.2
   end
 
+  def welcome
+    blank
+    line
+    puts "           Welcome To WikiScraper!            "
+    line
+    sleep(time)
+    blank
+    line
+    puts "Let's search for an article:"
+    line
+    sleep(time)
+  end
+
   def loading
     3.times do |index|
       blank
@@ -19,17 +32,9 @@ class WikiScraper::CLI
     end
   end
 
-  def read_more
-    puts "Would you like to read more? (Y/N)"
-    input = gets.strip
-    if input == "y"
-      true
-    elsif input == "n"
-      false
-    else
-      puts "Invalid input. Try Again"
-      read_more
-    end
+  def page_search
+    puts "Enter a term and we will attempt to retrieve the page"
+    gets
   end
 
   def get_subheading_choice
@@ -49,7 +54,7 @@ class WikiScraper::CLI
     puts "             Have a great day!"
     line
     line
-    sleep(3)
+    sleep(time)
   end
 
   def program_loop
@@ -67,18 +72,10 @@ class WikiScraper::CLI
   end
 
   def cli
-    blank
-    line
-    puts "           Welcome To WikiScraper!            "
-    line
-    sleep(time)
-    blank
-    line
-    puts "Let's check out an article:"
-    line
-    sleep(time)
+    welcome
+    search_term = page_search.strip.gsub(" ","_")
     loading
-    page = WikiScraper::Scraper.new.get_page
+    page = WikiScraper::Scraper.new.get_page(search_term)
     @article = WikiScraper::WikiDisplay.new(page)
     puts
     @running = true

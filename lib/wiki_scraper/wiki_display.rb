@@ -26,7 +26,7 @@ class WikiScraper::WikiDisplay
 
     @page.css(".mw-parser-output").children.map do |thing|
       if thing.name == "h2"
-        @heading_array << thing.text.strip
+        @heading_array << thing.text.gsub("[edit]", "").strip
       else
         if !@heading_array.empty? && thing.name == "p"
           @h[@heading_array.last] ||= []

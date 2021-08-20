@@ -69,11 +69,11 @@ class WikiScraper::WikiDisplay
     puts "Topics:"
     line
     @heading_array.each do |heading|
-      puts "#{index}. #{heading}"
+      puts "#{index+1}. #{heading}"
       index += 1
     end
     puts "\n"
-    puts "#{index}. To exit"
+    puts "#{index+1}. To exit"
     line
   end
 
@@ -81,7 +81,7 @@ class WikiScraper::WikiDisplay
     blank
     line
     line
-    puts "Topic #{number}/#{subheading_count}: #{@heading_array[number]}"
+    puts "Topic #{number+1}/#{subheading_count}: #{@heading_array[number]}"
     line
     line
     puts @h["#{@heading_array[number]}"]
@@ -89,6 +89,6 @@ class WikiScraper::WikiDisplay
   end
 
   def subheading_count
-    @heading_array.count - 1
+    @heading_array.count
   end
 end

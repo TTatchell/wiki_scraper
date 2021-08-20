@@ -8,7 +8,7 @@ class WikiScraper::CLI
   end
 
   def time #This is for testing to speed things up
-    0.2
+    2.5
   end
 
   def welcome
@@ -18,7 +18,7 @@ class WikiScraper::CLI
     line
     sleep(time)
     blank
-    line
+    line 
     puts "Let's search for an article:"
     line
     sleep(time)
@@ -28,7 +28,7 @@ class WikiScraper::CLI
     3.times do |index|
       blank
       puts "Loading#{"." * (index + 1)}"
-      sleep(time)
+      sleep(0.5)
     end
   end
 
@@ -36,6 +36,8 @@ class WikiScraper::CLI
     puts "Enter a term and we will attempt to retrieve the page"
     gets
   end
+
+  
 
   def get_subheading_choice
     puts "Alright, make a selection: (1-#{@article.subheading_count + 1})"

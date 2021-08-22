@@ -6,7 +6,10 @@ WikiScraper is a simple CLI built using Ruby that scrapes information off Wikipe
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Clone the repo.
+2. Navigate to ./bin.
+3. Use "ruby wiki_scraper.rb " to run.
+4. Within program you can search for a Wikipedia article.
 
 ## Contributing
 

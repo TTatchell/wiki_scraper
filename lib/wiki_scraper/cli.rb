@@ -14,7 +14,7 @@ class WikiScraper::CLI
   def welcome
     blank
     line
-    puts "           Welcome To WikiScraper!            "
+    puts "           Welcome To WikiScraper! " #Be cool to add the version here
     line
     sleep(1.5)
     blank

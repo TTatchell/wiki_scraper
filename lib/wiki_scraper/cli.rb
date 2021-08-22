@@ -21,7 +21,7 @@ class WikiScraper::CLI
     line
     puts "Let's search for an article:"
     line
-    sleep(time)
+    sleep(1.5)
   end
 
   def loading
@@ -69,7 +69,7 @@ class WikiScraper::CLI
       elsif input == @article.subheading_count
         @running = false
         @search_again = true
-      elsif input > @article.subheading_count + 1 || input < 1 
+      elsif input > @article.subheading_count + 1 or input < 0
         puts "Invalid Input. Try Again"
         sleep(1)
       else

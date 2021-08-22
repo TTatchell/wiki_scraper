@@ -43,7 +43,7 @@ class WikiScraper::WikiDisplay
   end
 
   def clean_headings_and_paragraphs
-    bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes"]
+    bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes", "Further reading", "Cited sources"]
     @heading_array.each_with_index do |heading|
       if bad_headings.any? { |bad| bad == heading }
         @heading_array = @heading_array - [heading]

@@ -18,7 +18,7 @@ class WikiScraper::WikiDisplay
   def get_summary
     paragraphs = @page.css("p")
     if paragraphs.text.strip == "Other reasons this message may be displayed:"
-      @summary = "Wikipedia does not have an article with this exact name. Type '1' to exit."
+      @summary = "Wikipedia does not have an article with this exact name."
     else
       @summary = paragraphs.find { |para| para.text.length > 50 }.text.gsub(/\[\d\d?\d?\]/, "")
     end
@@ -45,7 +45,7 @@ class WikiScraper::WikiDisplay
   def clean_headings_and_paragraphs
     bad_headings = ["Contents", "See also", "References", "Bibliography", "External links", "Navigation menu", "Notes", "Further reading", "Cited sources"]
     @heading_array.each_with_index do |heading|
-      if bad_headings.any? { |bad| bad == heading }
+      if bad_headings.any? { |bad| bad == heading } || @h[heading].nil?
         @heading_array = @heading_array - [heading]
         @h.delete(heading.to_s)
       end
@@ -78,7 +78,11 @@ class WikiScraper::WikiDisplay
         index += 1
       end
       puts "\n"
-      puts "#{index + 1}. To exit"
+      puts "#{index + 1}. To make another search"
+      puts "#{index + 2}. To exit"
+      line
+    else
+      puts "There are no topics to display. Type '1' to exit."
       line
     end
   end

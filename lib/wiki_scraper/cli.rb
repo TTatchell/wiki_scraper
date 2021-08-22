@@ -16,9 +16,9 @@ class WikiScraper::CLI
     line
     puts "           Welcome To WikiScraper!            "
     line
-    sleep(time)
+    sleep(1.5)
     blank
-    line 
+    line
     puts "Let's search for an article:"
     line
     sleep(time)
@@ -36,8 +36,6 @@ class WikiScraper::CLI
     puts "Enter a term and we will attempt to retrieve the page"
     gets
   end
-
-  
 
   def get_subheading_choice
     puts "Make a selection: (1-#{@article.subheading_count + 1})"
@@ -64,23 +62,34 @@ class WikiScraper::CLI
       blank
       @article.print_trio
       input = get_subheading_choice
-      if input == @article.subheading_count
+      if input == @article.subheading_count + 1
         exit_message
-        break
+        @running = false
+        @search_again = false
+      elsif input == @article.subheading_count
+        @running = false
+        @search_again = true
+      elsif input > @article.subheading_count + 1 || input < 1 
+        puts "Invalid Input. Try Again"
+        sleep(1)
+      else
+        @article.print_topic(input)
+        return_to_menu
       end
-      @article.print_topic(input)
-      return_to_menu
     end
   end
 
   def cli
     welcome
-    search_term = page_search.strip.gsub(" ","_")
+    search_term = page_search.strip.gsub(" ", "_")
     loading
     page = WikiScraper::Scraper.new.get_page(search_term)
     @article = WikiScraper::WikiDisplay.new(page)
     puts
     @running = true
     program_loop
+    if @search_again
+      cli
+    end
   end
 end

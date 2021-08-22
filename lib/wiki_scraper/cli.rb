@@ -38,7 +38,7 @@ class WikiScraper::CLI
   end
 
   def get_subheading_choice
-    puts "Make a selection: (1-#{@article.subheading_count + 1})"
+    puts "Make a selection: (1-#{@article.subheading_count + 2})"
     input = gets.strip.to_i - 1
   end
 

@@ -82,7 +82,8 @@ class WikiScraper::WikiDisplay
       puts "#{index + 2}. To exit"
       line
     else
-      puts "There are no topics to display. Type '1' to exit."
+      puts "There are no topics to display."
+      puts "Type '1' to search again or '2' to exit."
       line
     end
   end

@@ -17,7 +17,11 @@ class WikiScraper::WikiDisplay
 
   def get_summary
     paragraphs = @page.css("p")
-    @summary = paragraphs.find { |para| para.text.length > 50 }.text.gsub(/\[\d\d?\d?\]/, "")
+    if paragraphs.text.strip == "Other reasons this message may be displayed:"
+      @summary = "Wikipedia does not have an article with this exact name. Type '1' to exit."
+    else
+      @summary = paragraphs.find { |para| para.text.length > 50 }.text.gsub(/\[\d\d?\d?\]/, "")
+    end
   end
 
   def create_headings_and_paragraphs
@@ -65,23 +69,25 @@ class WikiScraper::WikiDisplay
   end
 
   def print_subheadings
-    index = 0
-    puts "Topics:"
-    line
-    @heading_array.each do |heading|
-      puts "#{index+1}. #{heading}"
-      index += 1
+    if @heading_array.length > 0
+      index = 0
+      puts "Topics:"
+      line
+      @heading_array.each do |heading|
+        puts "#{index + 1}. #{heading}"
+        index += 1
+      end
+      puts "\n"
+      puts "#{index + 1}. To exit"
+      line
     end
-    puts "\n"
-    puts "#{index+1}. To exit"
-    line
   end
 
   def print_topic(number)
     blank
     line
     line
-    puts "Topic #{number+1}/#{subheading_count}: #{@heading_array[number]}"
+    puts "Topic #{number + 1}/#{subheading_count}: #{@heading_array[number]}"
     line
     line
     puts @h["#{@heading_array[number]}"]

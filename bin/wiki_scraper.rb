@@ -1,4 +1,4 @@
-#This will be the executable that will requuire environment and will call /lib/wiki_scraper/CLI
+#!/usr/bin/env ruby
 
 require_relative "../config/environment.rb"
 

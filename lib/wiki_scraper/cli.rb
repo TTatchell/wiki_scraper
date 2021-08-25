@@ -14,7 +14,7 @@ class WikiScraper::CLI
   def welcome
     blank
     line
-    puts "           Welcome To WikiScraper! " #Be cool to add the version here
+    puts "          Welcome To WikiScraper! #{WikiScraper::VERSION}"
     line
     sleep(1.5)
     blank
@@ -25,10 +25,10 @@ class WikiScraper::CLI
   end
 
   def loading
-    3.times do |index|
+    10.times do |index|
       blank
       puts "Loading#{"." * (index + 1)}"
-      sleep(0.5)
+      sleep(0.05)
     end
   end
 
